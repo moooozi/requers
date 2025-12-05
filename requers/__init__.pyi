@@ -1,43 +1,37 @@
-"""
-requers - A fast, Rust-based HTTP client for Python.
-
-A high-performance HTTP client library that provides a requests-like API
-for making HTTP requests and downloading files. Built with Rust for speed
-and reliability, offering features like resumable downloads, progress callbacks,
-and native SSL support.
-"""
-
-from collections.abc import Callable
 from typing import Any
 
 class Response:
-    """HTTP Response object similar to requests.Response."""
-
     status_code: int
-    ok: bool
+    text: str
+    headers: dict[str, str]
     url: str
+    ok: bool
 
-    def raise_for_status(self) -> None:
-        """Raise an exception if the response status is an error (4xx or 5xx)."""
+    def raise_for_status(self) -> None: ...
+    def json(self) -> Any: ...
 
-    def json(self) -> Any:
-        """Parse the response body as JSON."""
+class DownloadHandle:
+    def cancel(self) -> None: ...
+    def abort(self) -> None: ...
+    def get_progress(self) -> dict[str, Any]: ...
+    def is_finished(self) -> bool: ...
+    def is_successful(self) -> bool: ...
 
 def get(
     url: str,
     headers: dict[str, str] | None = None,
+    params: dict[str, str] | None = None,
     timeout: float | None = None,
-) -> Response:
-    """Make an HTTP GET request."""
-
+    allow_redirects: bool = True,
+    proxies: dict[str, str] | None = None,
+    auth: dict[str, str] | None = None,
+) -> Response: ...
 def download_file(
     url: str,
     path: str,
-    progress_callback: Callable[[dict[str, Any]], None] | None = None,
     resume: bool = True,
-    callback_interval: float = 1.0,
-) -> None:
-    """Download a file from URL to path with optional progress callback."""
-
-def cancel_download() -> None:
-    """Cancel the current download operation."""
+    headers: dict[str, str] | None = None,
+    buffer_size: int = 65536,
+) -> DownloadHandle: ...
+def hash_file(path: str) -> str: ...
+def hash_bytes(data: bytes) -> str: ...
