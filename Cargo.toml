@@ -16,6 +16,6 @@ name = "requers"
 crate-type = ["cdylib"]
 
 [profile.release]
-lto = true
 opt-level = "z"
+lto = "fat"
 codegen-units = 1
