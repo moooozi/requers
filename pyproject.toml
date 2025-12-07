@@ -4,10 +4,10 @@ build-backend = "maturin"
 
 [project]
 name = "requers"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Rust-based HTTP client for Python with some requests-like methods."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 license = "MIT"
 authors = [
     {name = "M Zidane", email = "92719420+moooozi@users.noreply.github.com"},
@@ -19,8 +19,6 @@ classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Operating System :: OS Independent",
